@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>El bosque retrocede | Deforestación del Chaco paraguayo</title>
+
+  <meta name="description"
+    content="Una exploración visual de la pérdida de cobertura forestal en Boquerón y Alto Paraguay entre 2001 y 2025.">
+
+  <!-- ============================================================
+       FUENTES
+       ============================================================ -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Roboto+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- ============================================================
+       SCROLLAMA
+       ============================================================ -->
+
+  <script src="https://unpkg.com/scrollama"></script>
+
+  <style>
+
+    /* ============================================================
+       VARIABLES
+       ============================================================ */
+
+    :root {
+
+      --bg: #0a101d;
+      --bg-soft: #101827;
+
+      --paper: #fff1e5;
+
+      --text: #e5e7eb;
+      --text-bright: #ffffff;
+      --text-muted: #9ca3af;
+
+      --red: #ff4554;
+      --yellow: #fbbf24;
+      --green: #5f9f68;
+      --blue: #38bdf8;
+
+      --border: rgba(255,255,255,0.12);
+
+      --serif: "Lora", Georgia, serif;
+      --sans: "Inter", Arial, sans-serif;
+      --mono: "Roboto Mono", monospace;
+
+      --content-width: 1120px;
+      --text-width: 720px;
+    }
+
+
+    /* ============================================================
+       RESET
+       ============================================================ */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+
+      display: flex;
+      align-items: flex-end;
+
+      padding: 0 30px 90px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(10,16,29,0.05),
+          rgba(10,16,29,0.98)
+        ),
+        radial-gradient(
+          circle at 70% 35%,
+          rgba(95,159,104,0.18),
+          transparent 40%
+        );
+
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.025) 1px,
+          transparent 1px
+        );
+
+      background-size: 40px 40px;
+
+      opacity: 0.35;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      width: 100%;
+      max-width: var(--content-width);
+
+      margin: auto;
+    }
+
+    .kicker {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+
+      color: var(--red);
+
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      max-width: 850px;
+
+      font-family: var(--serif);
+
+      font-size: clamp(3rem, 7vw, 6.8rem);
+      line-height: 0.98;
+
+      color: var(--text-bright);
+
+      font-weight: 600;
+
+      letter-spacing: -0.045em;
+
+      margin-bottom: 30px;
+    }
+
+    .hero-subtitle {
+      max-width: 680px;
+
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+
+      color: var(--text);
+
+      line-height: 1.5;
+    }
+
+    .hero-meta {
+      margin-top: 35px;
+
+      font-family: var(--mono);
+      font-size: 0.72rem;
+
+      color: var(--text-muted);
+    }
+
+
+    /* ============================================================
+       CONTENIDO EDITORIAL
+       ============================================================ */
+
+    .article {
+      max-width: var(--text-width);
+
+      margin: 0 auto;
+
+      padding: 90px 25px;
+    }
+
+    .article p {
+      font-size: 1.15rem;
+
+      margin-bottom: 1.6rem;
+
+      color: var(--text);
+    }
+
+    .article .lead {
+      font-size: 1.4rem;
+
+      color: var(--text-bright);
+
+      line-height: 1.55;
+    }
+
+    .article h2 {
+      font-size: 2.3rem;
+
+      line-height: 1.15;
+
+      color: var(--text-bright);
+
+      margin: 70px 0 25px;
+    }
+
+    .article strong {
+      color: white;
+    }
+
+
+    /* ============================================================
+       DATOS DESTACADOS
+       ============================================================ */
+
+    .stat-strip {
+      max-width: var(--content-width);
+
+      margin: 20px auto 100px;
+
+      padding: 0 25px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat {
+      padding: 35px 25px;
+
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat-label {
+      font-family: var(--sans);
+
+      font-size: 0.72rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.1em;
+
+      color: var(--text-muted);
+
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: var(--mono);
+
+      font-size: 1.7rem;
+
+      color: var(--text-bright);
+    }
+
+
+    /* ============================================================
+       SCROLLYTELLING
+       ============================================================ */
+
+    #scrolly {
+      position: relative;
+
+      display: flex;
+
+      width: 100%;
+
+      max-width: 1400px;
+
+      margin: 0 auto;
+
+      padding: 40px 25px 100px;
+    }
+
+    #scrolly article {
+      position: relative;
+
+      width: 42%;
+
+      z-index: 2;
+    }
+
+    .step {
+      min-height: 85vh;
+
+      display: flex;
+
+      align-items: center;
+
+      padding: 30px 45px 30px 0;
+
+      opacity: 0.25;
+
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+
+      transform: translateY(30px);
+    }
+
+    .step.is-active {
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+    .step-inner {
+      max-width: 430px;
+
+      background: rgba(10,16,29,0.86);
+
+      padding: 28px;
+
+      border-left: 2px solid rgba(255,255,255,0.15);
+
+      backdrop-filter: blur(5px);
+    }
+
+    .step.is-active .step-inner {
+      border-left-color: var(--red);
+    }
+
+    .step-number {
+      font-family: var(--mono);
+
+      font-size: 0.7rem;
+
+      color: var(--red);
+
+      letter-spacing: 0.1em;
+
+      margin-bottom: 10px;
+    }
+
+    .step h2 {
+      font-family: var(--serif);
+
+      font-size: 2.25rem;
+
+      line-height: 1.12;
+
+      color: white;
+
+      margin-bottom: 18px;
+    }
+
+    .step p {
+      font-size: 1.05rem;
+
+      color: var(--text);
+
+      line-height: 1.65;
+    }
+
+    .step .year {
+      color: var(--yellow);
+
+      font-family: var(--mono);
+
+      font-weight: 500;
+    }
+
+
+    /* ============================================================
+       IMAGEN STICKY
+       ============================================================ */
+
+    #scrolly figure {
+      position: sticky;
+
+      top: 8vh;
+
+      width: 58%;
+
+      height: 82vh;
+
+      margin: 0;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      overflow: hidden;
+
+      z-index: 1;
+    }
+
+    .image-frame {
+      position: relative;
+
+      width: 100%;
+
+      height: 100%;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+    }
+
+    #storyImage {
+      max-width: 100%;
+      max-height: 100%;
+
+      width: auto;
+      height: auto;
+
+      object-fit: contain;
+
+      border: 1px solid rgba(255,255,255,0.08);
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.45);
+
+      transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+    }
+
+    .image-overlay {
+      position: absolute;
+
+      left: 20px;
+      bottom: 20px;
+
+      padding: 10px 14px;
+
+      background: rgba(10,16,29,0.88);
+
+      border-left: 2px solid var(--red);
+
+      font-family: var(--mono);
+
+      font-size: 0.7rem;
+
+      color: white;
+
+      backdrop-filter: blur(5px);
+    }
+
+
+    /* ============================================================
+       COMPARACIÓN
+       ============================================================ */
+
+    .comparison {
+      max-width: var(--content-width);
+
+      margin: 80px auto 120px;
+
+      padding: 0 25px;
+    }
+
+    .section-kicker {
+      font-family: var(--sans);
+
+      font-size: 0.72rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.12em;
+
+      color: var(--red);
+
+      margin-bottom: 10px;
+    }
+
+    .comparison h2 {
+      font-size: 3rem;
+
+      line-height: 1.1;
+
+      color: white;
+
+      margin-bottom: 15px;
+    }
+
+    .comparison-intro {
+      max-width: 700px;
+
+      font-size: 1.15rem;
+
+      color: var(--text-muted);
+
+      margin-bottom: 45px;
+    }
+
+    .department-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 30px;
+    }
+
+    .department-card {
+      border-top: 1px solid var(--border);
+
+      padding-top: 20px;
+    }
+
+    .department-card h3 {
+      font-family: var(--sans);
+
+      font-size: 1.25rem;
+
+      color: white;
+
+      margin-bottom: 10px;
+    }
+
+    .department-card img {
+      width: 100%;
+
+      aspect-ratio: 16 / 10;
+
+      object-fit: contain;
+
+      background: #070c15;
+
+      border: 1px solid var(--border);
+    }
+
+    .department-card p {
+      font-size: 0.95rem;
+
+      color: var(--text-muted);
+
+      margin-top: 12px;
+    }
+
+
+    /* ============================================================
+       EXPLORADOR DINÁMICO
+       ============================================================ */
+
+    .explorer {
+      max-width: var(--content-width);
+
+      margin: 0 auto;
+
+      padding: 80px 25px 120px;
+    }
+
+    .explorer-header {
+      border-top: 1px solid var(--border);
+
+      padding-top: 30px;
+
+      margin-bottom: 40px;
+    }
+
+    .explorer-header h2 {
+      font-size: 3rem;
+
+      line-height: 1.1;
+
+      color: white;
+
+      margin-bottom: 15px;
+    }
+
+    .explorer-header p {
+      max-width: 700px;
+
+      color: var(--text-muted);
+
+      font-size: 1.1rem;
+    }
+
+    .explorer-controls {
+      display: flex;
+
+      gap: 15px;
+
+      margin-bottom: 30px;
+    }
+
+    .explorer-controls select {
+      background: var(--bg-soft);
+
+      color: white;
+
+      border: 1px solid var(--border);
+
+      padding: 12px 15px;
+
+      font-family: var(--sans);
+
+      font-size: 0.85rem;
+    }
+
+    .explorer-image {
+      width: 100%;
+
+      background: #070c15;
+
+      border: 1px solid var(--border);
+
+      padding: 15px;
+    }
+
+    #departmentImage {
+      width: 100%;
+
+      max-height: 800px;
+
+      object-fit: contain;
+
+      margin: auto;
+    }
+
+    .image-caption {
+      padding-top: 15px;
+
+      font-family: var(--mono);
+
+      font-size: 0.7rem;
+
+      color: var(--text-muted);
+    }
+
+
+    /* ============================================================
+       FUENTE
+       ============================================================ */
+
+    .methodology {
+      max-width: var(--text-width);
+
+      margin: 0 auto;
+
+      padding: 80px 25px 120px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .methodology h2 {
+      color: white;
+
+      font-size: 2rem;
+
+      margin-bottom: 25px;
+    }
+
+    .methodology p {
+      font-size: 0.95rem;
+
+      color: var(--text-muted);
+
+      margin-bottom: 1rem;
+    }
+
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+
+    footer {
+      max-width: var(--content-width);
+
+      margin: auto;
+
+      padding: 40px 25px;
+
+      border-top: 1px solid var(--border);
+
+      color: var(--text-muted);
+
+      font-family: var(--sans);
+
+      font-size: 0.75rem;
+    }
+
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    @media (max-width: 850px) {
+
+      .hero {
+        padding-bottom: 60px;
+      }
+
+      .stat-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        border-right: none;
+
+        border-bottom: 1px solid var(--border);
+      }
+
+      .stat:last-child {
+        border-bottom: none;
+      }
+
+      #scrolly {
+        display: block;
+      }
+
+      #scrolly article {
+        width: 100%;
+      }
+
+      #scrolly figure {
+        position: sticky;
+
+        top: 5vh;
+
+        width: 100%;
+
+        height: 55vh;
+
+        margin-bottom: -20vh;
+      }
+
+      .step {
+        min-height: 90vh;
+
+        padding-right: 0;
+      }
+
+      .step-inner {
+        max-width: 100%;
+      }
+
+      .department-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison h2,
+      .explorer-header h2 {
+        font-size: 2.2rem;
+      }
+    }
+
+
+    @media (max-width: 600px) {
+
+      .hero h1 {
+        font-size: 3.1rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.05rem;
+      }
+
+      .article {
+        padding-top: 60px;
+      }
+
+      .step h2 {
+        font-size: 1.8rem;
+      }
+
+      #scrolly figure {
+        height: 48vh;
+      }
+
+      .explorer-controls {
+        flex-direction: column;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+
+  <header class="hero">
+
+    <div class="hero-content">
+
+      <div class="kicker">
+        Paraguay · Chaco · 2001–2025
+      </div>
+
+      <h1>
+        El bosque retrocede en silencio
+      </h1>
+
+      <p class="hero-subtitle">
+        En el Chaco paraguayo, la transformación del territorio
+        puede verse como una secuencia de píxeles que desaparecen.
+        Boquerón y Alto Paraguay concentran una parte fundamental
+        de esta historia.
+      </p>
+
+      <div class="hero-meta">
+        Periodismo de datos · Hansen Global Forest Change 2025 v1.13
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- ============================================================
+       INTRODUCCIÓN
+       ============================================================ -->
+
+  <section class="article">
+
+    <p class="lead">
+
+      El Chaco paraguayo ocupa una enorme extensión del territorio
+      nacional. Su paisaje, sin embargo, no permanece estático.
+      Durante las últimas décadas, la expansión de la frontera
+      agropecuaria ha transformado grandes superficies de bosque,
+      especialmente en los departamentos de Boquerón y Alto Paraguay.
+
+    </p>
+
+    <p>
+
+      La magnitud de este proceso resulta difícil de observar
+      cuando se mira solamente un año. Pero cuando las imágenes
+      se ordenan cronológicamente, aparece otra historia: la de
+      una frontera que avanza gradualmente sobre el bosque.
+
+    </p>
+
+    <p>
+
+      Esta visualización reconstruye esa transformación utilizando
+      datos de pérdida de cobertura forestal y mapas exportados
+      para los departamentos del país. El objetivo no es solamente
+      mostrar cuánto bosque desapareció, sino observar
+      <strong>cómo cambia espacialmente el territorio a través del tiempo</strong>.
+
+    </p>
+
+    <p>
+
+      Para comenzar, nos concentramos en dos departamentos del
+      Chaco: <strong>Boquerón</strong> y <strong>Alto Paraguay</strong>.
+      El mapa siguiente muestra ambos territorios y permite seguir
+      la expansión de la pérdida forestal desde el comienzo de
+      la serie hasta 2025.
+
+    </p>
+
+  </section>
+
+
+  <!-- ============================================================
+       MÉTRICAS
+       ============================================================ -->
+
+  <section class="stat-strip">
+
+    <div class="stat">
+      <div class="stat-label">
+        Periodo analizado
+      </div>
+
+      <div class="stat-value">
+        2001–2025
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">
+        Departamentos destacados
+      </div>
+
+      <div class="stat-value">
+        2
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-label">
+        Fuente
+      </div>
+
+      <div class="stat-value">
+        GFC v1.13
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       SCROLLYTELLING
+       ============================================================ -->
+
+  <section id="scrolly">
+
+
+    <!-- ========================================================
+         TEXTO
+         ======================================================== -->
+
+    <article>
+
+
+      <!-- AÑO 2 -->
+
+      <div class="step" data-step="1">
+
+        <div class="step-inner">
+
+          <div class="step-number">
+            01 · COMIENZO
+          </div>
+
+          <h2>
+            El cambio apenas comienza a hacerse visible
+          </h2>
+
+          <p>
+
+            En el <span class="year">año 2</span> de la secuencia,
+            las áreas de pérdida todavía aparecen relativamente
+            dispersas. El territorio chaqueño conserva una
+            continuidad forestal mucho mayor que la que veremos
+            posteriormente.
+
+          </p>
+
+          <p>
+
+            Esta primera imagen funciona como punto de referencia:
+            antes de observar la magnitud acumulada, necesitamos
+            entender cómo se veía el territorio al comienzo del
+            proceso.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- AÑO 10 -->
+
+      <div class="step" data-step="2">
+
+        <div class="step-inner">
+
+          <div class="step-number">
+            02 · ACELERACIÓN
+          </div>
+
+          <h2>
+            Diez años después, el patrón cambia
+          </h2>
+
+          <p>
+
+            Al llegar al <span class="year">año 10</span>,
+            la pérdida deja de aparecer como eventos aislados.
+            Las áreas transformadas comienzan a adquirir una
+            estructura espacial más evidente.
+
+          </p>
+
+          <p>
+
+            El mapa permite observar algo que un único indicador
+            nacional no puede mostrar: la deforestación no ocurre
+            de manera uniforme. Se concentra y se expande siguiendo
+            patrones territoriales específicos.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- AÑO 25 -->
+
+      <div class="step" data-step="3">
+
+        <div class="step-inner">
+
+          <div class="step-number">
+            03 · 2025
+          </div>
+
+          <h2>
+            Veinticinco años después, el paisaje es otro
+          </h2>
+
+          <p>
+
+            En el <span class="year">año 25</span>, la acumulación
+            temporal permite observar con claridad la dimensión
+            del cambio.
+
+          </p>
+
+          <p>
+
+            Lo que comenzó como pequeñas áreas de transformación
+            se convierte en un patrón mucho más extendido.
+            La comparación entre las tres imágenes permite seguir
+            visualmente la expansión de la frontera sobre el
+            territorio chaqueño.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+    </article>
+
+
+    <!-- ========================================================
+         IMAGEN STICKY
+         ======================================================== -->
+
+    <figure>
+
+      <div class="image-frame">
+
+        <img
+          id="storyImage"
+          src="images/map_export_Alto_Paraguay_Boquer%C3%B3n_combined_forest_change_year_2_high_res.png"
+          alt="Mapa de cambio de cobertura forestal en Alto Paraguay y Boquerón"
+        >
+
+        <div
+          class="image-overlay"
+          id="imageYear">
+          AÑO 2 · ALTO PARAGUAY + BOQUERÓN
+        </div>
+
+      </div>
+
+    </figure>
+
+
+  </section>
+
+
+  <!-- ============================================================
+       TEXTO POST-SCROLL
+       ============================================================ -->
+
+  <section class="article">
+
+    <h2>
+      El cambio no ocurre de la misma manera en todo el Chaco
+    </h2>
+
+    <p>
+
+      La secuencia anterior permite observar la dimensión temporal
+      del fenómeno. Pero existe otra pregunta: ¿cómo se distribuye
+      la presión forestal entre los diferentes departamentos?
+
+    </p>
+
+    <p>
+
+      Para responderla, el siguiente mapa utiliza las imágenes
+      completas generadas para cada departamento. Los archivos
+      siguen la convención:
+
+    </p>
+
+    <p style="font-family: var(--mono); font-size: 0.85rem; color: var(--yellow);">
+
+      departamento_combined.png
+
+    </p>
+
+    <p>
+
+      De esta manera, la página puede incorporar nuevos
+      departamentos simplemente agregándolos al JSON y colocando
+      la imagen correspondiente dentro de la carpeta
+      <strong>images/</strong>.
+
+    </p>
+
+  </section>
+
+
+  <!-- ============================================================
+       COMPARACIÓN BOQUERÓN / ALTO PARAGUAY
+       ============================================================ -->
+
+  <section class="comparison">
+
+    <div class="section-kicker">
+      Dos territorios del Chaco
+    </div>
+
+    <h2>
+      Boquerón y Alto Paraguay
+    </h2>
+
+    <p class="comparison-intro">
+
+      Las dos imágenes permiten comparar visualmente la estructura
+      territorial de ambos departamentos. Las imágenes se cargan
+      automáticamente desde la carpeta <strong>images/</strong>.
+
+    </p>
+
+
+    <div class="department-grid">
+
+
+      <article class="department-card">
+
+        <h3>
+          Boquerón
+        </h3>
+
+        <img
+          src="images/boqueron_combined.png"
+          alt="Mapa completo de deforestación de Boquerón"
+          loading="lazy"
+        >
+
+        <p>
+          Cobertura y pérdida forestal acumulada del departamento
+          de Boquerón.
+        </p>
+
+      </article>
+
+
+      <article class="department-card">
+
+        <h3>
+          Alto Paraguay
+        </h3>
+
+        <img
+          src="images/alto_paraguay_combined.png"
+          alt="Mapa completo de deforestación de Alto Paraguay"
+          loading="lazy"
+        >
+
+        <p>
+          Cobertura y pérdida forestal acumulada del departamento
+          de Alto Paraguay.
+        </p>
+
+      </article>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- ============================================================
+       EXPLORADOR DINÁMICO
+       ============================================================ -->
+
+  <section class="explorer">
+
+    <div class="explorer-header">
+
+      <div class="section-kicker">
+        Explorador territorial
+      </div>
+
+      <h2>
+        El mapa completo de cada departamento
+      </h2>
+
+      <p>
+
+        Selecciona un departamento para observar su mapa completo.
+        Los nombres y estadísticas se obtienen directamente del
+        archivo JSON.
+
+      </p>
+
+    </div>
+
+
+    <div class="explorer-controls">
+
+      <select id="departmentSelect">
+        <option value="">
+          Seleccionar departamento
+        </option>
+      </select>
+
+      <select id="layerSelect">
+        <option value="combined">
+          Capa combinada
+        </option>
+        <option value="cover">
+          Cobertura 2000
+        </option>
+        <option value="loss">
+          Pérdida anual
+        </option>
+      </select>
+
+    </div>
+
+
+    <figure class="explorer-image">
+
+      <img
+        id="departmentImage"
+        src=""
+        alt="Mapa departamental"
+      >
+
+      <figcaption
+        id="departmentCaption"
+        class="image-caption">
+      </figcaption>
+
+    </figure>
+
+  </section>
+
+
+  <!-- ============================================================
+       METODOLOGÍA
+       ============================================================ -->
+
+  <section class="methodology">
+
+    <h2>
+      Datos y metodología
+    </h2>
+
+    <p>
+
+      La visualización utiliza información local almacenada en
+      <strong>data/paraguay_deforestacion.json</strong> y mapas
+      PNG generados previamente a partir del pipeline de análisis.
+
+    </p>
+
+    <p>
+
+      La fuente principal de información sobre pérdida de cobertura
+      forestal es Hansen Global Forest Change 2025 v1.13.
+
+    </p>
+
+    <p>
+
+      Los mapas no representan una medición de propiedad,
+      productividad agropecuaria ni uso específico del suelo.
+      Representan cambios detectados en la cobertura forestal
+      de acuerdo con la metodología y resolución del conjunto
+      de datos utilizado.
+
+    </p>
+
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+
+  <footer>
+
+    Fuente:
+    Hansen Global Forest Change 2025 v1.13.
+
+    <br>
+
+    Visualización estática · JavaScript vanilla · Datos locales
+
+  </footer>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+
+  <script>
+
+    /* ============================================================
+       CONFIGURACIÓN
+       ============================================================ */
+
+    const CONFIG = {
+
+      jsonPath: "data/paraguay_deforestacion.json",
+
+      imagePath: "images/",
+
+      /*
+
+        Nombres EXACTOS de los mapas utilizados en el scrollytelling.
+
+        El encodeURI permite trabajar correctamente con caracteres
+        como "ó" en "Boquerón".
+
+      */
+
+      storyImages: {
+
+        1:
+          "map_export_Alto_Paraguay_Boquerón_combined_forest_change_year_2_high_res.png",
+
+        2:
+          "map_export_Alto_Paraguay_Boquerón_combined_forest_change_year_10_high_res.png",
+
+        3:
+          "map_export_Alto_Paraguay_Boquerón_combined_forest_change_year_25_high_res.png"
+
+      },
+
+      storyLabels: {
+
+        1: "AÑO 2 · ALTO PARAGUAY + BOQUERÓN",
+
+        2: "AÑO 10 · ALTO PARAGUAY + BOQUERÓN",
+
+        3: "AÑO 25 · ALTO PARAGUAY + BOQUERÓN"
+
+      }
+
+    };
+
+
+    /* ============================================================
+       ELEMENTOS
+       ============================================================ */
+
+    const storyImage =
+      document.getElementById("storyImage");
+
+    const imageYear =
+      document.getElementById("imageYear");
+
+    const departmentSelect =
+      document.getElementById("departmentSelect");
+
+    const layerSelect =
+      document.getElementById("layerSelect");
+
+    const departmentImage =
+      document.getElementById("departmentImage");
+
+    const departmentCaption =
+      document.getElementById("departmentCaption");
+
+    let departmentsCatalog = [];
+
+
+    /* ============================================================
+       SCROLLYTELLING
+       ============================================================ */
+
+    function changeStoryImage(step) {
+
+      const filename =
+        CONFIG.storyImages[step];
+
+      if (!filename) return;
+
+      const newSrc =
+        encodeURI(CONFIG.imagePath + filename);
+
+      storyImage.style.opacity = "0";
+
+      storyImage.style.transform =
+        "scale(0.985)";
+
+      setTimeout(() => {
+
+        storyImage.src = newSrc;
+
+        imageYear.textContent =
+          CONFIG.storyLabels[step];
+
+        storyImage.onload = () => {
+
+          storyImage.style.opacity = "1";
+
+          storyImage.style.transform =
+            "scale(1)";
+
+        };
+
+      }, 180);
+
+    }
+
+
+    /* ============================================================
+       SCROLLAMA
+       ============================================================ */
+
+    const scroller =
+      scrollama();
+
+
+    function setupScroller() {
+
+      scroller
+        .setup({
+
+          step: "#scrolly article .step",
+
+          offset: 0.55,
+
+          progress: false
+
+        })
+
+        .onStepEnter(response => {
+
+          const step =
+            response.element.dataset.step;
+
+          document
+            .querySelectorAll(".step")
+            .forEach(element => {
+
+              element.classList.remove("is-active");
+
+            });
+
+          response.element
+            .classList.add("is-active");
+
+          changeStoryImage(step);
+
+        });
+
+    }
+
+
+    /* ============================================================
+       RESIZE
+       ============================================================ */
+
+    window.addEventListener(
+      "resize",
+      () => {
+
+        scroller.resize();
+
+      }
+    );
+
+
+    /* ============================================================
+       JSON
+       ============================================================ */
+
+    async function loadData() {
+
+      try {
+
+        const response =
+          await fetch(CONFIG.jsonPath);
+
+        if (!response.ok) {
+
+          throw new Error(
+            `HTTP ${response.status}`
+          );
+
+        }
+
+        const data =
+          await response.json();
+
+        populateDepartments(data);
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "No se pudo cargar el JSON:",
+          error
+        );
+
+        departmentCaption.textContent =
+          "No fue posible cargar los datos departamentales.";
+
+      }
+
+    }
+
+
+    /* ============================================================
+       NORMALIZACIÓN DE NOMBRES
+       ============================================================ */
+
+    function normalizeDepartmentName(name) {
+
+      return String(name)
+
+        .normalize("NFD")
+
+        .replace(/[\u0300-\u036f]/g, "")
+
+        .toLowerCase()
+
+        .replace(/ñ/g, "n")
+
+        .replace(/\s+/g, "_")
+
+        .replace(/[^a-z0-9_-]/g, "");
+
+    }
+
+
+    /* ============================================================
+       OBTENER DEPARTAMENTOS DESDE JSON
+       ============================================================ */
+
+    function extractDepartments(data) {
+
+      let rows = [];
+
+      if (Array.isArray(data)) {
+
+        rows = data;
+
+      }
+
+      else if (Array.isArray(data.departamentos)) {
+
+        rows = data.departamentos;
+
+      }
+
+      else if (Array.isArray(data.departments)) {
+
+        rows = data.departments;
+
+      }
+
+      else if (Array.isArray(data.data)) {
+
+        rows = data.data;
+
+      }
+
+      else if (Array.isArray(data.records)) {
+
+        rows = data.records;
+
+      }
+
+      else {
+
+        /*
+          Si el JSON es un objeto donde cada clave representa
+          un departamento, también lo soportamos.
+        */
+
+        rows =
+          Object.entries(data)
+            .map(([key, value]) => {
+
+              if (
+                typeof value === "object" &&
+                value !== null
+              ) {
+
+                return {
+                  departamento: key,
+                  ...value
+                };
+
+              }
+
+              return null;
+
+            })
+            .filter(Boolean);
+
+      }
+
+      return rows;
+
+    }
+
+
+    /* ============================================================
+       BUSCAR NOMBRE DEL DEPARTAMENTO
+       ============================================================ */
+
+    function getDepartmentName(row) {
+
+      return (
+
+        row.departamento ||
+
+        row.department ||
+
+        row.Departamento ||
+
+        row.nombre ||
+
+        row.name ||
+
+        row.department_name ||
+
+        row.slug ||
+
+        ""
+
+      );
+
+    }
+
+
+    /* ============================================================
+       POBLAR SELECTOR
+       ============================================================ */
+
+    function populateDepartments(data) {
+
+      const rows =
+        extractDepartments(data);
+
+      const departments = [];
+
+      rows.forEach(row => {
+
+        const name =
+          getDepartmentName(row);
+
+        if (!name) return;
+
+        const slug =
+          row.slug || normalizeDepartmentName(name);
+
+        departments.push({
+
+          name,
+          slug,
+          data: row
+
+        });
+
+      });
+
+
+      /*
+        Elimina duplicados.
+      */
+
+      const unique =
+        Array.from(
+
+          new Map(
+            departments.map(
+              item => [item.slug, item]
+            )
+          ).values()
+
+        );
+
+
+      /*
+        Orden alfabético.
+      */
+
+      unique.sort(
+        (a, b) =>
+          a.name.localeCompare(
+            b.name,
+            "es"
+          )
+      );
+
+
+      departmentSelect.innerHTML = "";
+
+      const defaultOption =
+        document.createElement("option");
+
+      defaultOption.value = "";
+
+      defaultOption.textContent =
+        "Seleccionar departamento";
+
+      departmentSelect.appendChild(
+        defaultOption
+      );
+
+
+      unique.forEach(item => {
+
+        const option =
+          document.createElement("option");
+
+        option.value =
+          item.slug;
+
+        option.dataset.name =
+          item.name;
+
+        option.textContent =
+          item.name;
+
+        departmentSelect.appendChild(
+          option
+        );
+
+      });
+
+      departmentsCatalog = unique;
+
+
+      /*
+        Si existe Concepción, lo seleccionamos
+        inicialmente porque es el ejemplo solicitado.
+      */
+
+      const concepcion =
+        unique.find(
+          d =>
+            normalizeDepartmentName(
+              d.name
+            ) === "concepcion"
+        );
+
+      const boqueron =
+        unique.find(
+          d =>
+            normalizeDepartmentName(
+              d.name
+            ) === "boqueron"
+        );
+
+      if (concepcion) {
+
+        departmentSelect.value =
+          concepcion.slug;
+
+        showDepartment(
+          concepcion
+        );
+
+      }
+
+      else if (boqueron) {
+
+        departmentSelect.value =
+          boqueron.slug;
+
+        showDepartment(
+          boqueron
+        );
+
+      }
+
+    }
+
+
+    /* ============================================================
+       MOSTRAR DEPARTAMENTO
+       ============================================================ */
+
+    function showDepartment(item) {
+
+      if (!item) return;
+
+      const selectedLayer =
+        layerSelect?.value || "combined";
+
+      const imageByLayer =
+        item.data?.images?.[selectedLayer];
+
+      const filename =
+        imageByLayer ||
+        `${item.slug}_${selectedLayer}.png`;
+
+      const imageSrc =
+        imageByLayer ||
+        `${CONFIG.imagePath}${filename}`;
+
+      departmentImage.style.opacity =
+        "0";
+
+      setTimeout(() => {
+
+        departmentImage.src =
+          encodeURI(imageSrc);
+
+        departmentImage.alt =
+          `Mapa completo de ${item.name}`;
+
+        departmentCaption.textContent =
+          `${item.name} · capa ${selectedLayer} · ${filename}`;
+
+        departmentImage.onload = () => {
+
+          departmentImage.style.opacity =
+            "1";
+
+        };
+
+        departmentImage.onerror = () => {
+
+          departmentCaption.textContent =
+            `No se encontró la imagen ${filename}`;
+
+        };
+
+      }, 120);
+
+    }
+
+
+    /* ============================================================
+       SELECTOR
+       ============================================================ */
+
+    departmentSelect.addEventListener(
+      "change",
+      event => {
+
+        const slug =
+          event.target.value;
+
+        if (!slug) return;
+
+        const option =
+          event.target
+            .selectedOptions[0];
+
+        const name =
+          option.dataset.name;
+
+        showDepartment({
+
+          name,
+
+          slug,
+
+          data: departmentsCatalog.find(
+            dep => dep.slug === slug
+          )?.data
+
+        });
+
+      }
+    );
+
+    layerSelect?.addEventListener(
+      "change",
+      () => {
+
+        const slug =
+          departmentSelect.value;
+
+        if (!slug) return;
+
+        const selected =
+          departmentsCatalog.find(
+            dep => dep.slug === slug
+          );
+
+        showDepartment(selected);
+
+      }
+    );
+
+
+    /* ============================================================
+       INICIALIZACIÓN
+       ============================================================ */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        /*
+          Imagen inicial.
+        */
+
+        changeStoryImage(1);
+
+        /*
+          Activamos el primer step.
+        */
+
+        const firstStep =
+          document.querySelector(
+            '.step[data-step="1"]'
+          );
+
+        if (firstStep) {
+
+          firstStep.classList.add(
+            "is-active"
+          );
+
+        }
+
+        /*
+          Scrollytelling.
+        */
+
+        setupScroller();
+
+        /*
+          JSON.
+        */
+
+        loadData();
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>
